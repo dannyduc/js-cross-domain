@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>postMessage-proxy-for-xdr</title>
+    <link rel="stylesheet" href="style.css"/>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+</head>
+<body>
+
+<a id="sendLink" href="#">Send a request via xdr proxy</a>
+<iframe
+        id="proxyFrame"
+        src="http://api.ingenuity.dev:8080/postMessage-proxy-for-xdr/xdr-proxy.html"
+        border="1"></iframe>
+<div id="logMessages"></div>
+
+<script>
+    var targetOrigin = 'http://api.ingenuity.dev:8080';
+
+    function sendRequest() {
+        var message = {
+            uri: '/app/doPost',
+            content: {name: 'val'}
+        };
+        logMessage('submitting ajax request')
+        proxyFrame.postMessage(message, targetOrigin);
+    }
+
+    function processRequest(event) {
+        if (event.origin !== targetOrigin) {
+            return;
+        }
+        logMessage("get results from xd ajax call: " + event.data.message);
+    }
+
+    function logMessage(msg) {
+        var divMsg = $('<div>', { text: '[' + document.location.hostname + '] ' +msg });
+        $('#logMessages').append(divMsg);
+    }
+
+    window.addEventListener("message", processRequest, false);
+
+    $('#sendLink').on('click', sendRequest);
+</script>
+</body>
+</html>

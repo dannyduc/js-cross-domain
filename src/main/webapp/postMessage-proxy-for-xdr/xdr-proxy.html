@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>xdr proxy frame</title>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript">
+
+        function proxyAjaxRequest(event) {
+            logMessage('got request from ' + event.origin);
+
+            if (event.origin !== 'http://danny.ingenuity.com:8080') {
+                logMessage('skipping as request is not from a known white list of trusted origins');
+                return
+            }
+
+            logMessage('proxying ajax request ' + event.data.uri);
+            var jqxhr = $.post(event.data.uri, event.data.content)
+                    .done(function(data) {
+                        var rtnMsg = {
+                            message: data.message
+                        }
+                        logMessage('posting results of ajax request ');
+                        event.source.postMessage(rtnMsg, event.origin)
+                    });
+        }
+
+        function logMessage(msg) {
+            var divMsg = $('<div>', { text: '[' + document.location.hostname + '] ' +msg });
+            $('#logMessages').append(divMsg);
+        }
+
+        window.addEventListener("message", proxyAjaxRequest, false);
+    </script>
+</head>
+<body>
+<h1>xdr proxy frame</h1>
+<div id="logMessages"></div>
+</body>
+</html>

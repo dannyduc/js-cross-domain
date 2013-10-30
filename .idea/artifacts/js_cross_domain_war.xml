@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="js-cross-domain:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="js-cross-domain-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="js-cross-domain:war exploded" />
+    </root>
+  </artifact>
+</component>
