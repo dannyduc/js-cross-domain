@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Document Domain</title>
+    <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+<h1>danny.ingenuity.com</h1>
+
+<p>
+    <a id="send" href="#">Send AJAX call to macduc.ingenuity.com</a>
+</p>
+
+<script src="../js/jquery.js"></script>
+<script>
+(function ($, window, document, undef) {
+    document.domain = "ingenuity.com";
+    window.tunnelAjax;
+    var iframe = $('<iframe>')
+            .attr('src', 'http://macduc.ingenuity.com:8080/document-domain-sub-domain/tunnel.html')
+            .load(onload)
+            .appendTo('head')[0];
+
+    function onload() {
+        window.tunnelAjax = iframe.contentWindow.jQuery.ajax;
+    }
+
+    $('#send').on('click', function(e) {
+        window.tunnelAjax({
+            type: 'POST',
+            url: 'http://macduc.ingenuity.com:8080/app/doPost',
+            contentType: 'application/json; charset=utf-8',
+            data: { name: 'value' }
+        }).done(function(data) {
+                    $('<div>', {
+                        text: 'got response from server: ' + data.message
+                    }).appendTo($('body'));
+                }).fail(function(jqXHR, textStatus, errorThrown) {
+
+                });
+    });
+})($, window, document);
+</script>
+</body>
+</html>

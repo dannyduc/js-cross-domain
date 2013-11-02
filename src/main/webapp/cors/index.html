@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>CORS</title>
+</head>
+<body>
+
+<a id="send" href="#">Send AJAX CORS request</a>
+
+<script src="../js/jquery.js"></script>
+<script>
+    $('#send').on('click', function(e) {
+        $.ajax({
+            type: 'POST',
+            url: 'http://api.ingenuity.dev:8080/app/doPost',
+            contentType: 'application/json; charset=utf-8',
+            data: { name: 'value' }
+        }).done(function(data) {
+            $('<div>', {
+                text: 'got response from server: ' + data.message
+            }).appendTo($('body'));
+        });
+    });
+</script>
+</body>
+</html>
