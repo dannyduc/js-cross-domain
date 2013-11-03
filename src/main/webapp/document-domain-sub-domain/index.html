@@ -6,7 +6,19 @@
     <link rel="stylesheet" href="../css/style.css"/>
 </head>
 <body>
-<h1>danny.ingenuity.com</h1>
+<h1>Document Domain Example</h1>
+
+<h2>danny.ingenuity.com</h2>
+
+<p>
+<ol>
+    <li>set document.domain='company.com' in parent window</li>
+    <li>create tunnel iframe</li>
+    <li>in tunnel iframe set document.domain='company.com'</li>
+    <li>from parent get reference to iframe when loaded</li>
+    <li>parent call iframe to execute ajax request</li>
+</ol>
+</p>
 
 <p>
     <a id="send" href="#">Send AJAX call to macduc.ingenuity.com</a>

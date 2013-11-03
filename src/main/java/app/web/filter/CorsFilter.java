@@ -34,20 +34,20 @@ public class CorsFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-//        if (isPreflight(request)) {
-//            emitAllowOrigin(request, response);
-//            emitAllowHeaders(request, response);
-//            response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-//            response.addHeader("Access-Control-Allow-Credentials", "true");
-//            response.addHeader("Access-Control-Max-Age", Integer.toString(ONE_WEEK_IN_SECONDS));
-//
-//            response.setStatus(HttpServletResponse.SC_OK);
-//            return;
-//        }
-//
-//        if (isCors(request)) {
-//            emitAllowOrigin(request, response);
-//        }
+        if (isPreflight(request)) {
+            emitAllowOrigin(request, response);
+            emitAllowHeaders(request, response);
+            response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+            response.addHeader("Access-Control-Allow-Credentials", "true");
+            response.addHeader("Access-Control-Max-Age", Integer.toString(ONE_WEEK_IN_SECONDS));
+
+            response.setStatus(HttpServletResponse.SC_OK);
+            return;
+        }
+
+        if (isCors(request)) {
+            emitAllowOrigin(request, response);
+        }
 
         chain.doFilter(request, response);
     }

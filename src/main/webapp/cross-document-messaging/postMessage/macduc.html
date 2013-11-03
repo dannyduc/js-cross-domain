@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    window.addEventListener("message", function(message) {
+        if (message.origin === 'http://danny.ingenuity.com:8080') {
+            alert(message.data);
+        }
+    });
+</script>
+</body>
+</html>

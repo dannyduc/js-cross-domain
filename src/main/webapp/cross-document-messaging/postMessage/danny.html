@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div><a id="sendEl" href="#">Send message</a></div>
+<iframe id="macducFrame" src="http://macduc.ingenuity.com:8080/cross-document-messaging/postMessage/macduc.html"></iframe>
+
+<script>
+    var sendEl = document.getElementById("sendEl");
+    sendEl.addEventListener("click", function() {
+        var win = document.getElementById('macducFrame').contentWindow;
+        win.postMessage("hola!", "http://macduc.ingenuity.com:8080");
+    });
+</script>
+</body>
+</html>

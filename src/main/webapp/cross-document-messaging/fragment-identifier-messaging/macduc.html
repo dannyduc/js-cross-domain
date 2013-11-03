@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    var prevMsg = location.hash;
+    window.setInterval(function() {
+        if (location.hash !== prevMsg) {
+            prevMsg = location.hash;
+            alert(prevMsg);
+        }
+    }, 100);
+</script>
+</body>
+</html>
